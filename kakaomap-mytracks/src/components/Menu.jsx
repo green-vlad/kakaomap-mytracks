@@ -1,14 +1,52 @@
-import React from 'react';
-import * as Menubar from '@radix-ui/react-menubar';
-import './Menu.css';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import {CheckIcon, ChevronRightIcon, DotFilledIcon, HamburgerMenuIcon} from '@radix-ui/react-icons';
+import { useState } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
+import TracksList from "./TracksList";
 
 const Menu = () => {
+  const [isTracksListVisible, setIsTracksListVisible] = useState(false);
+
+  function toggleTracksList(isTracksListVisible) {
+    setIsTracksListVisible(!isTracksListVisible);
+    return (
+      <TracksList></TracksList>
+    );
+  }
+
   return (
-    <Menubar.Root className="MenubarRoot">
-      <Menubar.Menu>
-        <Menubar.Trigger className="MenubarTrigger">Login</Menubar.Trigger>
-      </Menubar.Menu>
-    </Menubar.Root>
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger asChild>
+        <button
+          className="absolute z-10 left-1/2 transform -translate-x-1/2 rounded-full w-[35px] h-[35px] inline-flex items-center justify-center text-violet11 bg-white shadow-[0_2px_10px] shadow-blackA4 outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
+          aria-label="Customise options"
+        >
+          <HamburgerMenuIcon />
+        </button>
+      </DropdownMenu.Trigger>
+
+      <DropdownMenu.Portal>
+        <DropdownMenu.Content
+          className="min-w-[220px] bg-white rounded-md p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
+          sideOffset={5}
+        >
+          <DropdownMenu.Item className="group text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1">
+            Login
+          </DropdownMenu.Item>
+          <DropdownMenu.Item onClick={ toggleTracksList } className="group text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1">
+            Tracks list
+          </DropdownMenu.Item>
+          <DropdownMenu.Item
+            className="group text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
+            disabled
+          >
+            Another button
+          </DropdownMenu.Item>
+
+          <DropdownMenu.Arrow className="fill-white" />
+        </DropdownMenu.Content>
+      </DropdownMenu.Portal>
+    </DropdownMenu.Root>
   );
 };
 
