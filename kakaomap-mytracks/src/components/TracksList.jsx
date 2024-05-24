@@ -49,31 +49,29 @@ function TracksList(props) {
           <Table.Row className="text-center">
             <Table.RowHeaderCell>Short description</Table.RowHeaderCell>
             <Table.RowHeaderCell>Date</Table.RowHeaderCell>
-            <Table.RowHeaderCell className="text-xl"><TbWorld/></Table.RowHeaderCell>
-            <Table.RowHeaderCell className="text-xl"><TbEyeClosed/></Table.RowHeaderCell>
-            <Table.RowHeaderCell className="text-xl"></Table.RowHeaderCell>
+            <Table.RowHeaderCell className="text-2xl text-center"><TbWorld/></Table.RowHeaderCell>
           </Table.Row>
           {TestData.map((item, index) => (
             <Table.Row key={index} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
-              <Table.Cell>{item.name}</Table.Cell>
+              <Table.Cell className="grow">{item.name}</Table.Cell>
               <Table.Cell>{ (new Date(item.startDateTime)).toISOString().split('T')[0] }</Table.Cell>
               <Table.Cell>
-                <Checkbox.Root
-                  className="shadow-blackA4 hover:bg-violet3 flex h-[20px] w-[20px] appearance-none items-center justify-center rounded-[4px] bg-white outline-none focus:shadow-[0_0_0_2px_black] m-0.5">
-                  <Checkbox.Indicator>
-                    <CheckboxIcon/>
-                  </Checkbox.Indicator>
-                </Checkbox.Root>
+                <div className="flex flex-row">
+                  <Checkbox.Root
+                    className="shadow-blackA4 hover:bg-violet3 flex h-[20px] w-[20px] appearance-none items-center justify-center rounded-[4px] bg-gray-200 outline-none focus:shadow-[0_0_0_2px_black] m-0.5">
+                    <Checkbox.Indicator>
+                      <CheckboxIcon/>
+                    </Checkbox.Indicator>
+                  </Checkbox.Root>
+                  <Checkbox.Root
+                    className="shadow-blackA4 hover:bg-violet3 flex h-[20px] w-[20px] appearance-none items-center justify-center rounded-[4px] bg-gray-200 outline-none focus:shadow-[0_0_0_2px_black] m-0.5">
+                    <Checkbox.Indicator>
+                      <CheckboxIcon/>
+                    </Checkbox.Indicator>
+                  </Checkbox.Root>
+                  <TbTrash className="text-2xl"/>
+                </div>
               </Table.Cell>
-              <Table.Cell maxWidth="10px">
-                <Checkbox.Root
-                  className="shadow-blackA4 hover:bg-violet3 flex h-[20px] w-[20px] appearance-none items-center justify-center rounded-[4px] bg-white outline-none focus:shadow-[0_0_0_2px_black] m-0.5">
-                  <Checkbox.Indicator>
-                    <CheckboxIcon/>
-                  </Checkbox.Indicator>
-                </Checkbox.Root>
-              </Table.Cell>
-              <Table.Cell className="text-xl"><TbTrash/></Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
