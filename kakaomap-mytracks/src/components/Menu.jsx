@@ -1,52 +1,35 @@
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import {CheckIcon, ChevronRightIcon, DotFilledIcon, HamburgerMenuIcon} from '@radix-ui/react-icons';
 import { useState } from "react";
-import * as Dialog from "@radix-ui/react-dialog";
 import TracksList from "./TracksList";
+import Modal from "./Modal.";
+import * as Dialog from "@radix-ui/react-dialog";
+import {Button, Flex} from "@radix-ui/themes";
+
 
 const Menu = () => {
-  const [isTracksListVisible, setIsTracksListVisible] = useState(false);
-
-  function toggleTracksList(isTracksListVisible) {
-    setIsTracksListVisible(!isTracksListVisible);
-    return (
-      <TracksList></TracksList>
-    );
-  }
+  const [openTracksList, setOpenTracksList] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
-        <button
-          className="absolute z-10 left-1/2 transform -translate-x-1/2 rounded-full w-[35px] h-[35px] inline-flex items-center justify-center text-violet11 bg-white shadow-[0_2px_10px] shadow-blackA4 outline-none hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black"
-          aria-label="Customise options"
-        >
-          <HamburgerMenuIcon />
-        </button>
-      </DropdownMenu.Trigger>
-
-      <DropdownMenu.Portal>
-        <DropdownMenu.Content
-          className="min-w-[220px] bg-white rounded-md p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
-          sideOffset={5}
-        >
-          <DropdownMenu.Item className="group text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1">
-            Login
-          </DropdownMenu.Item>
-          <DropdownMenu.Item onClick={ toggleTracksList } className="group text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1">
-            Tracks list
-          </DropdownMenu.Item>
-          <DropdownMenu.Item
-            className="group text-[13px] leading-none text-violet11 rounded-[3px] flex items-center h-[25px] px-[5px] relative pl-[25px] select-none outline-none data-[disabled]:text-mauve8 data-[disabled]:pointer-events-none data-[highlighted]:bg-violet9 data-[highlighted]:text-violet1"
-            disabled
-          >
-            Another button
-          </DropdownMenu.Item>
-
-          <DropdownMenu.Arrow className="fill-white" />
-        </DropdownMenu.Content>
-      </DropdownMenu.Portal>
-    </DropdownMenu.Root>
+    <div className="absolute z-10 bg-gray-200 w-full max-h-12 flex justify-between p-1 bg-transparent">
+      <Dialog.Root>
+        <Dialog.Trigger asChild>
+          <Button>Login</Button>
+        </Dialog.Trigger>
+        <Dialog.Portal>
+          <Dialog.Content className="fixed left-1/2 top-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-md bg-white p-8 text-gray-900 shadow">
+            <Flex display="flex">window tesing</Flex>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+      <Modal open={ open } onOpenChange={ setOpen }>
+        <Modal.Button asChild>
+          <Button className="float-right">Show tracks</Button>
+        </Modal.Button>
+        <Modal.Content title="Tracks list">
+          <TracksList />
+        </Modal.Content>
+      </Modal>
+    </div>
   );
 };
 
