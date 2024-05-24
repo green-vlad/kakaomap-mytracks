@@ -2,7 +2,7 @@ import useKakaoMapLoader from "./services/useKakaoMapLoader"
 import KakaoMap from "./components/KakaoMap";
 import {useState} from "react";
 import '@radix-ui/themes/styles.css';
-import { Theme } from '@radix-ui/themes';
+import {Theme} from '@radix-ui/themes';
 import Menu from './components/Menu';
 
 function App() {
@@ -12,14 +12,11 @@ function App() {
   useKakaoMapLoader();
 
   return (
-    <div className="App">
-      <Theme grayColor="auto" radius="large" scaling="100%">
-        <Menu></Menu>
-          <KakaoMap center={{ lat: 33.450701, lng: 126.570667 }}  style={{ width: "100%", height: "100vh" }}>
-
-          </KakaoMap>
-      </Theme>
-    </div>
+    <Theme grayColor="auto" radius="large" scaling="100%" className="App">
+      <Menu></Menu>
+        <KakaoMap center={{ lat: 33.450701, lng: 126.570667 }}  style={{ width: "100%", height: "100vh" }}>
+        </KakaoMap>
+    </Theme>
   );
 }
 

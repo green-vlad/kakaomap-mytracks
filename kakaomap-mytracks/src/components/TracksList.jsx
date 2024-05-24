@@ -48,17 +48,15 @@ function TracksList(props) {
         <Table.Body>
           <Table.Row className="text-center">
             <Table.RowHeaderCell>Short description</Table.RowHeaderCell>
-            <Table.RowHeaderCell>Start</Table.RowHeaderCell>
-            <Table.RowHeaderCell>Finish</Table.RowHeaderCell>
+            <Table.RowHeaderCell>Date</Table.RowHeaderCell>
             <Table.RowHeaderCell className="text-xl"><TbWorld/></Table.RowHeaderCell>
             <Table.RowHeaderCell className="text-xl"><TbEyeClosed/></Table.RowHeaderCell>
             <Table.RowHeaderCell className="text-xl"></Table.RowHeaderCell>
           </Table.Row>
           {TestData.map((item, index) => (
-            <Table.Row key={index} className={index % 2 == 0 ? 'bg-gray-100' : ''}>
+            <Table.Row key={index} className={index % 2 === 0 ? 'bg-gray-100' : ''}>
               <Table.Cell>{item.name}</Table.Cell>
-              <Table.Cell>{item.startDateTime}</Table.Cell>
-              <Table.Cell>{item.finishDateTime}</Table.Cell>
+              <Table.Cell>{ (new Date(item.startDateTime)).toISOString().split('T')[0] }</Table.Cell>
               <Table.Cell>
                 <Checkbox.Root
                   className="shadow-blackA4 hover:bg-violet3 flex h-[20px] w-[20px] appearance-none items-center justify-center rounded-[4px] bg-white outline-none focus:shadow-[0_0_0_2px_black] m-0.5">
@@ -67,7 +65,7 @@ function TracksList(props) {
                   </Checkbox.Indicator>
                 </Checkbox.Root>
               </Table.Cell>
-              <Table.Cell>
+              <Table.Cell maxWidth="10px">
                 <Checkbox.Root
                   className="shadow-blackA4 hover:bg-violet3 flex h-[20px] w-[20px] appearance-none items-center justify-center rounded-[4px] bg-white outline-none focus:shadow-[0_0_0_2px_black] m-0.5">
                   <Checkbox.Indicator>
@@ -82,7 +80,7 @@ function TracksList(props) {
       </Table.Root>
       <Form.Root>
         <Form.FormField>
-          <Form.FormControl type="file" className="file:bg-amber-300 file:px-6 file:py-3 file:m-5 file:border-none file:rounded-full file:cursor-pointer"/>
+          <Form.FormControl type="file" className="file:bg-blue-500 text-white file:px-6 file:py-3 file:m-5 file:border-none file:rounded-full file:cursor-pointer"/>
         </Form.FormField>
       </Form.Root>
     </div>
