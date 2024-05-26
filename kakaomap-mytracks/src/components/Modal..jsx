@@ -10,7 +10,7 @@ export default function Modal({ open, onOpenChange, children }) {
   );
 }
 
-function ModalContent({ title, children }) {
+function ModalContent({ title, children, setOpen }) {
   return (
     <>
       <Dialog.Overlay className="fixed inset-0 backdrop-blur-sm" />

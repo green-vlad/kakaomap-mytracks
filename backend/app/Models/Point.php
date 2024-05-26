@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Point extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'ref_track_id',
+        'lat',
+        'lng',
+        'datetime',
+        'ele',
+    ];
 }

@@ -4,7 +4,7 @@ import * as Form from '@radix-ui/react-form';
 import "@radix-ui/themes/styles.css"
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { CheckboxIcon } from '@radix-ui/react-icons';
-import {TbWorld, TbEyeClosed, TbTrash} from "react-icons/tb";
+import { TbWorld, TbTrash } from "react-icons/tb";
 
 const TestData = [
   {
