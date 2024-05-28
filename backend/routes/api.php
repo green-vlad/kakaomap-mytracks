@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\KakaoMapSdkController;
 use App\Http\Controllers\Api\TrackController;
 use App\Http\Middleware\ApiConvertToCamelCase;
 use App\Http\Middleware\ApiConvertToSnakeCase;
@@ -19,3 +20,4 @@ Route::get('/tracks/{track}/points', [TrackController::class, 'getPointsList'])-
 
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/kakaomap-sdk-js', [KakaoMapSdkController::class, 'kakaoMapSDKJs']);
