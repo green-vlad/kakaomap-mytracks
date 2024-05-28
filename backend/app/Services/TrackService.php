@@ -8,6 +8,7 @@ use App\Models\User;
 use DOMDocument;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class TrackService
 {
@@ -20,6 +21,27 @@ class TrackService
     public function __construct()
     {
         //
+    }
+
+    public function updateTrack(array $data): void
+    {
+        /** @var Track $track */
+        $track = Track::find($data['id'])->where('ref_user_id', 1)->get(); // Just to ensure that this track belongs to logged-in user
+        if (is_null($track)) {
+            throw new \Exception('Track not found');
+        }
+
+        $track = Track::find($data['id']);
+        $fieldName = Str::snake($data['name']);
+        if (!in_array($fieldName, $track->getFillable())) {
+            throw new \Exception('Invalid parameter');
+        }
+        if (is_bool($data['value'])) {
+            $data['value'] = $data['value'] ? 1 : 0;
+        }
+        $track->setAttribute($fieldName, $data['value']);
+        $track->save();
+        $track->refresh();
     }
 
     public function uploadTrack(UploadedFile $file, string $color): void
@@ -79,5 +101,10 @@ class TrackService
             ];
         }
         Point::insert($points);
+    }
+
+    public function getTrackPoints(Track $track): array
+    {
+        return $track->hasMany();
     }
 }

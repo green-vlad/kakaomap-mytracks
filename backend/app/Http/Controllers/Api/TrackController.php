@@ -51,9 +51,15 @@ class TrackController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Track $track)
+    public function update(Request $request)
     {
-        //
+        $data = $request->validate([
+            'id' => 'required|integer|exists:tracks,id',
+            'name' => 'required|string|max:255',
+            'value' => 'required',
+        ]);
+        $this->trackService->updateTrack($data);
+        return response()->json('', 204);
     }
 
     /**
@@ -62,5 +68,21 @@ class TrackController extends Controller
     public function destroy(Track $track)
     {
         //
+    }
+
+    public function getPointsList(Track $track): JsonResponse
+    {
+        return response()->json($track->getPoints()->get());
+    }
+
+    public function tracksToDisplay(): JsonResponse
+    {
+        /** @var User $user */
+        $user = User::find(1);
+        return response()->json(
+            $user->getTracks()
+                ->where('is_visible', 1)
+                ->get(),
+            200);
     }
 }

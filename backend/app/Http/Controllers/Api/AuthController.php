@@ -33,9 +33,4 @@ class AuthController extends Controller
         $user->currentAccessToken()->delete();
         return response()->json(['', 204]);
     }
-
-    public function getKakaomapKey()
-    {
-        return response()->json(['key' => getenv('KAKAOMAP_KEY')]);
-    }
 }
