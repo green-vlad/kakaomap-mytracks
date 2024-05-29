@@ -1,4 +1,3 @@
-import useKakaoMapLoader, {getKakaoMapKey} from "./services/useKakaoMapLoader"
 import KakaoMap from "./components/KakaoMap";
 import React, {useEffect, useState} from "react";
 import '@radix-ui/themes/styles.css';
@@ -6,7 +5,6 @@ import {Theme} from '@radix-ui/themes';
 import Menu from './components/Menu';
 import { loadVisibleTracks } from "./services/Loaders";
 import TrackLine from "./components/TrackLine";
-import { Polyline } from "react-kakao-maps-sdk";
 
 function App() {
   const [tracks, setTracks] = useState([]);
@@ -26,8 +24,6 @@ function App() {
       setVisibleTracks(list);
     });
   }, []);
-
-  // useKakaoMapLoader();
 
   return (
     <Theme grayColor="auto" radius="large" scaling="100%" className="App">
