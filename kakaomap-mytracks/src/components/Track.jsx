@@ -6,8 +6,6 @@ import { TbTrash } from "react-icons/tb";
 import { updateTrack } from "../services/Loaders";
 
 function Track(props) {
-  const [edited, setEdited] = useState(false);
-
   return (
     <Table.Row key={props.index} className={props.index % 2 === 0 ? 'bg-gray-100' : ''}>
       <Table.Cell className="grow">{props.item.description}</Table.Cell>

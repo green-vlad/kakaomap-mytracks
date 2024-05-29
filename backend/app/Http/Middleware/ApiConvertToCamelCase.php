@@ -19,6 +19,9 @@ class ApiConvertToCamelCase
         $response = $next($request);
         $content = $response->getContent();
         $json = json_decode($content, true);
+        if ($json === null) {
+            return $response;
+        }
         $replaced = [];
         foreach ($json as $key => $value) {
             $replaced[Str::camel($key)] = $this->convertArray($value);

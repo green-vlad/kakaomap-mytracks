@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Services\TrackService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class TrackController extends Controller
@@ -22,8 +23,7 @@ class TrackController extends Controller
      */
     public function index(): JsonResponse
     {
-        /** @var User $user */
-        $user = User::find(1);
+        $user = Auth::user();
         return response()->json($user->getTracks()->get(), 200);
     }
 
@@ -34,7 +34,7 @@ class TrackController extends Controller
     {
         $data = $request->validate([
             'file' => 'required|file|max:5048',
-            'color' => 'required|size:7|regex:/^#[a-fA-F0-9]{6}$/'
+            'color' => 'size:7|regex:/^#[a-fA-F0-9]{6}$/'
         ]);
         $this->trackService->uploadTrack($data['file'], $data['color']);
         return response()->json('', 204);
@@ -75,14 +75,13 @@ class TrackController extends Controller
         return response()->json($track->getPoints()->get());
     }
 
-    public function tracksToDisplay(): JsonResponse
+    public function all(): JsonResponse
     {
-        /** @var User $user */
-        $user = User::find(1);
-        return response()->json(
-            $user->getTracks()
-                ->where('is_visible', 1)
-                ->get(),
-            200);
+        return response()->json($this->trackService->all());
+    }
+
+    public function public(): JsonResponse
+    {
+        return response()->json($this->trackService->public());
     }
 }

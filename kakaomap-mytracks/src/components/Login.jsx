@@ -15,7 +15,7 @@ export default function Login(props) {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     }
-    console.log(payload);
+
     axiosClient.post("/login", payload)
       .then((response) => {
         localStorage.setItem("TOKEN", response.data.token);
