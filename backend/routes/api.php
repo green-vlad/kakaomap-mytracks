@@ -14,15 +14,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'user']);
 
-    Route::get('/tracks', [TrackController::class, 'index'])->middleware([ApiConvertToCamelCase::class]);
-    Route::patch('/tracks/update', [TrackController::class, 'update'])->middleware([ApiConvertToSnakeCase::class]);
-    Route::get('/tracks/all', [TrackController::class, 'all'])->middleware([ApiConvertToCamelCase::class]);
-    Route::post('/tracks/upload', [TrackController::class, 'store'])->middleware([ApiConvertToCamelCase::class]);
+    Route::get('/tracks', [TrackController::class, 'index']);
+    Route::patch('/tracks/update', [TrackController::class, 'update']);
+    Route::get('/tracks/all', [TrackController::class, 'all']);
+    Route::post('/tracks/upload', [TrackController::class, 'store']);
 
 });
 
-Route::get('/tracks/public', [TrackController::class, 'public'])->middleware([ApiConvertToCamelCase::class]);
-Route::get('/tracks/{track}/points', [TrackController::class, 'getPointsList'])->middleware([ApiConvertToCamelCase::class]);
+Route::get('/tracks/public', [TrackController::class, 'public']);
+Route::get('/tracks/{track}/points', [TrackController::class, 'getPointsList']);
 
 Route::post('/login', [AuthController::class, 'login']);
 

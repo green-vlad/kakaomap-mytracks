@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PointResource;
+use App\Http\Resources\TrackResource;
 use App\Models\Track;
-use App\Models\User;
 use App\Services\TrackService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 
 class TrackController extends Controller
 {
@@ -24,7 +24,7 @@ class TrackController extends Controller
     public function index(): JsonResponse
     {
         $user = Auth::user();
-        return response()->json($user->getTracks()->get(), 200);
+        return response()->json(TrackResource::collection($user->getTracks()->get()), 200);
     }
 
     /**
@@ -72,16 +72,16 @@ class TrackController extends Controller
 
     public function getPointsList(Track $track): JsonResponse
     {
-        return response()->json($track->getPoints()->get());
+        return response()->json(PointResource::collection($track->getPoints()->get()));
     }
 
     public function all(): JsonResponse
     {
-        return response()->json($this->trackService->all());
+        return response()->json(TrackResource::collection($this->trackService->all()));
     }
 
     public function public(): JsonResponse
     {
-        return response()->json($this->trackService->public());
+        return response()->json(TrackResource::collection($this->trackService->public()));
     }
 }
