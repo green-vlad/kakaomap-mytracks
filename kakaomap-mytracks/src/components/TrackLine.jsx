@@ -19,7 +19,7 @@ function TrackLine({ track, stroke=5, color="#000000", opacity=0.7, style="solid
     });
   }, []);
   return (
-    <Polyline path={[points]} strokeWeight={stroke} strokeOpacity={opacity} strokeColor={color} strokeStyle={style}/>
+    <Polyline path={[points]} strokeWeight={stroke} strokeOpacity={opacity} strokeColor={color} strokeStyle={style}  />
   );
 }
 

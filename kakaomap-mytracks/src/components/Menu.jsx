@@ -18,6 +18,7 @@ const Menu = (props) => {
     if (loggedIn) {
       localStorage.removeItem("TOKEN");
       setLoggedIn(false);
+      props.doAfterClose();
     }
   }
 
@@ -34,7 +35,7 @@ const Menu = (props) => {
           <Dialog.Trigger asChild>
             <Button className="float-left">Login</Button>
           </Dialog.Trigger>
-          <Modal.Content title="Login" onOpenChange={ setOpenLogin }>
+          <Modal.Content title="Login" onOpenChange={ setOpenLogin } doAfterClose={ props.doAfterClose }>
             <Login onOpenChange={ setOpenLogin } loggedIn={ setLoggedIn } />
           </Modal.Content>
         </Modal>

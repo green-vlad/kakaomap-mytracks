@@ -78,7 +78,7 @@ function TracksList(props) {
         <Form.FormField className="flex items-center">
           <Form.FormControl onChange={handleFileChange} type="file"
                             className="file:bg-blue-700 text-white file:px-1 file:py-1 file:m-1 file:border-none file:rounded-full file:cursor-pointer"/>
-          <select name="color" defaultChecked="#000000" onClick={handleColor} className="bg-black text-white rounded-full mx-1">
+          <select name="color" defaultChecked="#000000" onClick={handleColor} className="bg-black text-white rounded-full mx-1" disabled={!file}>
             <option value="#000000" className="bg-[#000000] text-white">Black</option>
             <option value="#FF0000" className="bg-[#FF0000] text-white">Red</option>
             <option value="#FFAE00" className="bg-[#FFAE00] text-white">Chinese Yellow</option>
@@ -86,7 +86,7 @@ function TracksList(props) {
             <option value="#001FFF" className="bg-[#001FFF] text-white">Blue</option>
             <option value="#FF00E8" className="bg-[#FF00E8] text-white">Fuchsia</option>
           </select>
-          <Button className="align-middle bg-blue-700" size="2" radius="full">Upload</Button>
+          <Button className="align-middle bg-blue-700" size="2" radius="full" disabled={!file}>Upload</Button>
         </Form.FormField>
       </Form.Root>
       {status && <Text>{status}</Text>}
