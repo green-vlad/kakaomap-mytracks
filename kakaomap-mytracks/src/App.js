@@ -7,27 +7,31 @@ import { loadVisibleTracks } from "./services/Loaders";
 import TrackLine from "./components/TrackLine";
 
 function App() {
-  const [tracks, setTracks] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [mapKey, setMapKey] = useState(null);
   const [visibleTracks, setVisibleTracks] = useState([]);
 
-  useEffect(() => {
-    async function getVisibibleTracks() {
-      try {
-        return await loadVisibleTracks();
-      } catch (error) {
-        console.error(error);
-      }
+  function _setNeedToRefresh() {
+    getVisibibleTracks().then(list => {
+      setVisibleTracks(list);
+    });
+  }
+
+  async function getVisibibleTracks() {
+    try {
+      return await loadVisibleTracks();
+    } catch (error) {
+      console.error(error);
     }
-    getVisibibleTracks().then(async list => {
+  }
+
+  useEffect(() => {
+    getVisibibleTracks().then(list => {
       setVisibleTracks(list);
     });
   }, []);
 
   return (
     <Theme grayColor="auto" radius="large" scaling="100%" className="App">
-      <Menu/>
+      <Menu doAfterClose={_setNeedToRefresh} />
       <KakaoMap center={{ lat: 37.4016529, lng: 126.7102978 }}  style={{ width: "100%", height: "100vh" }}>
         {visibleTracks &&
           visibleTracks.map((track, i) => {

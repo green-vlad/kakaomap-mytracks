@@ -6,6 +6,8 @@ use App\Models\Point;
 use App\Models\Track;
 use App\Models\User;
 use DOMDocument;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -103,8 +105,19 @@ class TrackService
         Point::insert($points);
     }
 
-    public function getTrackPoints(Track $track): array
+    public function all(): Collection
     {
-        return $track->hasMany();
+        $tracks = Track::where(function ($query) {
+            $query->where('is_public', 1);
+        })->orWhere(function ($query) {
+            $query->where('ref_user_id', Auth::id())->where('is_visible', 1);
+        })->get();
+        return $tracks;
+    }
+
+    public function public(): Collection
+    {
+        $tracks = Track::where('is_public', 1)->get();
+        return $tracks;
     }
 }

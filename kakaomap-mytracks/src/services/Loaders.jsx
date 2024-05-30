@@ -12,7 +12,12 @@ export async function loadTracks(props) {
 
 export async function loadVisibleTracks() {
   try {
-    let r = await axiosClient.get("/tracks/to-display");
+    let r = null;
+    if (localStorage.getItem("TOKEN")) {
+      r = await axiosClient.get("/tracks/all");
+    } else {
+      r = await axiosClient.get("/tracks/public");
+    }
     return r.data;
   } catch (error) {
     console.log(error);
